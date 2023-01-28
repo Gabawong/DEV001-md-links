@@ -1,43 +1,41 @@
-const { existsSync, isAbsolute, isDirectoryorfile, returnOnlyFilesMd, getAllLinks, validatedLinks } = require('./index.js')
+const {
+  existsSync,
+  isAbsolute,
+  returnOnlyFilesMd,
+  getAllLinks,
+  validatedLinks,
+} = require('./index.js')
 
 const mdLinks = (route, options) => {
   //resolve(resuelto) cuando se resuelve la promesa, y reject no,relacionado al then y catch, resolve y reject son callback,son funciones!! 
   return new Promise((resolve, reject) => {
     const pathAbsolute = isAbsolute(route);
-    const root = isDirectoryorfile(pathAbsolute);
-    //estamos devolviendo una promesa, en este caso usamos reject
-    if (!existsSync(pathAbsolute)) {
-      reject(`${route} This path does not exist`);
-    } else if (root !== 'directory' && root !== 'file') {
-      reject(`${pathAbsolute} is not a directory or a file`)
-    };
-    let files;
-    if (root === 'file') {
-      files = returnOnlyFilesMd(pathAbsolute);
-      //resolve(files);
-      //console.log(files);
-    };
-    const arrayAll = files.map(file => getAllLinks(file));
-    resolve(arrayAll);
-    // console.log(promises,'hola');
-
-
-    //return Promise.all(promises)
-    // .then(res => resolve([...res].flat(1)))
-    // .catch(reject);
+    //verificamos si la ruta existe, le pasamos la fn isAbsolute que verifica
+    //si el path es absoluto, sino que lo vuelva absoluto
+    if (existsSync(pathAbsolute)) {
+      const files = returnOnlyFilesMd(pathAbsolute);
+      if (files.length === 0) {
+        reject('THIS FILE DOES NOT EXIST')
+      }
+      getAllLinks(files).then((res) => {
+        if (options.validate === true) {
+          validatedLinks(res).then((file) => {
+            resolve(file)
+          });
+        };
+        if (options.validate === false) {
+          resolve(res)
+        }
+      })
+    }
+    else {
+      reject('THIS PATH DOES NOT EXIST')
+    }
   });
 };
-   const prom = mdLinks('./README.md',{validate:true});
-   const prom2 = prom.then(res => {
-    console.log(res);
-    return 5
-   });
-   
-   prom2.then(res =>{
-    console.log(res,'prom2');
-   })
+//mdLinks('./README.md');
+
 
 module.exports = {
   mdLinks
 };
-

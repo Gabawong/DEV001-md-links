@@ -1,9 +1,9 @@
 const fs = require('fs');
 //Para utilizar las API basadas en promesas usar fs/promises–––
-const fsprom = require('fs/promises')
 const path = require('path');
 const fetch = require('node-fetch');
 const { resolve } = require('path');
+
 
 //identificar si la ruta existe.
 const existsSync = (route) => fs.existsSync(route);
@@ -11,13 +11,13 @@ const existsSync = (route) => fs.existsSync(route);
 const isAbsolute = (route) => (path.isAbsolute(route)) ? route : path.resolve(route);
 
 //Saber si es un directorio o es un archivo.
-const isDirectoryorfile = (route) => {
-    if (fs.statSync(route).isDirectory()) {
-        return 'directory'
-    } else if (fs.statSync(route).isFile()) {
-        return 'file'
-    }
-};
+// const isDirectoryorfile = (route) => {
+//     if (fs.statSync(route).isDirectory()) {
+//         return 'directory'
+//     } else if (fs.statSync(route).isFile()) {
+//         return 'file'
+//     }
+// };
 //ahora tenemos que leer el directorio y devolver solo archivos dentro del direc.
 const isFile = (routeFile) => {
     return fs.statSync(routeFile).isFile();
@@ -49,37 +49,41 @@ const returnOnlyFilesMd = (routeFile) => {
 };
 //console.log(returnOnlyFilesMd('/Users/gaba/Documents/GABA/BOOTCAMP LABORATORIA /PROYECTOS/DEV001-md-links/DEV001-md-links/Prueba'));
 
-const readFile = (route) => fs.readFileSync ( route,'utf8');
+//const readFile = (route) => fs.readFileSync ( route,'utf8');
 //console.log(readFile('./readme.md'));
 
-// const readFileLinksValidated = (route) => fsprom.readFile(route, 'utf8')
-//     .then((data) => {
-//         return (data, route);
-//     })
-//     .catch((error) => {
-//         console.error(error +'ERROR: THIS FILE DOES NOT EXIST')
-//     });
-//  console.log(readFileLinksValidated('./readme.md'));   
+ const readFileLinks = (route) => new Promise ((resolve,reject) => {
+    fs.readFile(route,'utf8', (error, file) => {
+        if(error) {
+            reject(error +'ERROR: THIS FILE DOES NOT EXIST')
+        }
+        resolve(file);
+    });
+ });
+ //console.log(readFileLinks('./readme.md').then((res)=> console.log(res)));   
 
 const getAllLinks = (route) => {
+    return new Promise ((resolve, reject)=> {
     const arrayAllLinks = [];
-    const regEx = /\[(.*)\]\(((?:\/|https?:\/\/).*)\)/gi;
-    const file = readFile(route);
-    //console.log(file);
-    let match = regEx.exec(file);
-    for (let i = 0; i < route.length; i++) {
-        //Si el valor es diferente a nulo
-        if (match !== null) {
+    readFileLinks(route)
+    .then((file) => {
+        const regEx = /\[(.*)\]\(((?:\/|https?:\/\/).*)\)/gi;
+        let match = regEx.exec(file);
+        while(match !== null) {
             arrayAllLinks.push({
                 href: match[2],
                 text: match[1],
                 file: route,
             });
+            match = regEx.exec(file);
         };
-    };
-    return arrayAllLinks;
+        resolve(arrayAllLinks)
+    })
+    .catch((error) => reject(error));  
+});
 };
-//console.log(getAllLinks('/Users/gaba/Documents/GABA/BOOTCAMP LABORATORIA /PROYECTOS/DEV001-md-links/DEV001-md-links/README.md'));
+getAllLinks('README.md').then((res)=> console.log(res));
+
 //Ahora creamos un array que nos traiga además de los href,text,file, Status, ok o fail
 const validatedLinks = (arrayLinks) => {
     return Promise.all(arrayLinks.map((link => {
@@ -107,14 +111,20 @@ const validatedLinks = (arrayLinks) => {
             });
         })));
 };              
-//console.log(validatedLinks(getAllLinks('./README.md')).then(links => console.log(links)));
 
+//console.log(validatedLinks(getAllLinks('./README.md')).then(res => console.log(res)));
+//getAllLinks('README.md').then(((res)=>(validatedLinks(res).then(((resolve)=>console.log(resolve))))));
+// console.log(validatedLinks([{
+//     href: 'https://docs.npmjs.com/cli/install',
+//     text: 'docs oficiales de `npm install` acá',
+//     file: './README.md'
+//   }]));
 module.exports = {
     existsSync,
     isAbsolute,
-    isDirectoryorfile,
     arrayForFiles,
     returnOnlyFilesMd,
     getAllLinks,
-    validatedLinks 
+    validatedLinks
+     
 }
