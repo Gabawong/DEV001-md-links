@@ -2,11 +2,12 @@ const fs = require('fs');
 //Para utilizar las API basadas en promesas usar fs/promises–––
 const path = require('path');
 const fetch = require('node-fetch');
-const { resolve } = require('path');
+//const { resolve } = require('path');
 
 
 //identificar si la ruta existe.
 const existsSync = (route) => fs.existsSync(route);
+
 //Vamos determinar si la ruta es absoluta,si es relativo, entonces hay que convertilo en absoluto
 const isAbsolute = (route) => (path.isAbsolute(route)) ? route : path.resolve(route);
 
@@ -18,7 +19,7 @@ const isAbsolute = (route) => (path.isAbsolute(route)) ? route : path.resolve(ro
 //         return 'file'
 //     }
 // };
-//ahora tenemos que leer el directorio y devolver solo archivos dentro del direc.
+//función para saber si es un archivo 
 const isFile = (routeFile) => {
     return fs.statSync(routeFile).isFile();
 };
@@ -41,7 +42,7 @@ const arrayForFiles = (routeFile) => {
     }
     return arrayOnlyFiles;
 };
-//console.log(arrayForFiles('./Readme.md'));
+//console.log(arrayForFiles('/Users/gaba/Documents/GABA/BOOTCAMP LABORATORIA /PROYECTOS/DEV001-md-links/DEV001-md-links/Prueba/subPrueba'));
 
 //función para devolver la extensión de la ruta
 const returnOnlyFilesMd = (routeFile) => {
@@ -52,6 +53,7 @@ const returnOnlyFilesMd = (routeFile) => {
 //const readFile = (route) => fs.readFileSync ( route,'utf8');
 //console.log(readFile('./readme.md'));
 
+//ahora leemos los links 
  const readFileLinks = (route) => new Promise ((resolve,reject) => {
     fs.readFile(route,'utf8', (error, file) => {
         if(error) {
@@ -82,7 +84,7 @@ const getAllLinks = (route) => {
     .catch((error) => reject(error));  
 });
 };
-getAllLinks('README.md').then((res)=> console.log(res));
+//getAllLinks('/Users/gaba/Documents/GABA/BOOTCAMP LABORATORIA /PROYECTOS/DEV001-md-links/DEV001-md-links/Prueba/subPrueba/pruebalinks.md').then((res)=> console.log(res));
 
 //Ahora creamos un array que nos traiga además de los href,text,file, Status, ok o fail
 const validatedLinks = (arrayLinks) => {
@@ -105,15 +107,14 @@ const validatedLinks = (arrayLinks) => {
                     file: link.file,
                     status: `Fail ${error.message}`,
                     message: 'No status',
-                    ok: (result.ok) ? 'ok' : 'fail',
                 };
                 return dataError;
             });
         })));
 };              
 
-//console.log(validatedLinks(getAllLinks('./README.md')).then(res => console.log(res)));
-//getAllLinks('README.md').then(((res)=>(validatedLinks(res).then(((resolve)=>console.log(resolve))))));
+//console.log(validatedLinks(getAllLinks('./pruebalinks.md')).then(res => console.log(res)));
+//getAllLinks('./pruebalinks.md').then(((res)=>(validatedLinks(res).then(((resolve)=>console.log(resolve))))));
 // console.log(validatedLinks([{
 //     href: 'https://docs.npmjs.com/cli/install',
 //     text: 'docs oficiales de `npm install` acá',
@@ -125,6 +126,8 @@ module.exports = {
     arrayForFiles,
     returnOnlyFilesMd,
     getAllLinks,
-    validatedLinks
+    validatedLinks,
+    isFile,
+    readFileLinks
      
 }
