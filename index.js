@@ -112,9 +112,8 @@ const validatedLinks = (arrayLinks) => {
             });
         })));
 };              
-
 //console.log(validatedLinks(getAllLinks('./pruebalinks.md')).then(res => console.log(res)));
-//getAllLinks('./pruebalinks.md').then(((res)=>(validatedLinks(res).then(((resolve)=>console.log(resolve))))));
+//getAllLinks('/Users/gaba/Documents/GABA/BOOTCAMP LABORATORIA /PROYECTOS/DEV001-md-links/DEV001-md-links/Prueba/subPrueba/pruebalinks.md').then(((res)=>(validatedLinks(res).then(((resolve)=>console.log(resolve))))));
 // console.log(validatedLinks([{
 //     href: 'https://docs.npmjs.com/cli/install',
 //     text: 'docs oficiales de `npm install` acá',

@@ -14,26 +14,31 @@ const mdLinks = (route, options) => {
     //si el path es absoluto, sino que lo vuelva absoluto
     if (existsSync(pathAbsolute)) {
       const files = returnOnlyFilesMd(pathAbsolute);
+      //Promise.all - devuelve una promesa que termina correctamente cuando todas las promesas en el argumento
+      //iterable han sido concluídas con éxito, o bien rechaza la petición con el motivo pasado por la primera 
+      //promesa que es rechazada
+    
+      const links = Promise.all(files.map((file) => getAllLinks(file)));
       if (files.length === 0) {
         reject('THIS FILE DOES NOT EXIST')
-      }
-      getAllLinks(files).then((res) => {
-        if (options.validate === true) {
-          validatedLinks(res).then((file) => {
-            resolve(file)
-          });
-        };
-        if (options.validate === false) {
-          resolve(res)
-        }
-      })
+      };
+      if (options.validate === false) {
+        resolve(links.then((res) => res.flat()));
+        return;
+      };
+      if (options.validate === true) {
+        const valid = links
+        .then((res) => {console.log('hola',res),validatedLinks(res.flat())});
+        resolve(valid);
+        return;
+      };
     }
     else {
       reject('THIS PATH DOES NOT EXIST')
     }
   });
 };
-//mdLinks('./README.md');
+mdLinks('./README.md',{validate:false}).then(res => console.log(res));
 
 
 module.exports = {
