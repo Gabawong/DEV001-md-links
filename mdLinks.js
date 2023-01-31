@@ -6,6 +6,7 @@ const {
   validatedLinks,
 } = require('./index.js')
 
+
 const mdLinks = (route, options) => {
   //resolve(resuelto) cuando se resuelve la promesa, y reject no,relacionado al then y catch, resolve y reject son callback,son funciones!! 
   return new Promise((resolve, reject) => {
@@ -27,8 +28,8 @@ const mdLinks = (route, options) => {
         return;
       };
       if (options.validate === true) {
-        const valid = links
-        .then((res) => {console.log('hola',res),validatedLinks(res.flat())});
+        const valid = links.then((res) => validatedLinks(res.flat())
+        .catch((error) => console.log(error)));
         resolve(valid);
         return;
       };
@@ -38,7 +39,7 @@ const mdLinks = (route, options) => {
     }
   });
 };
-mdLinks('./README.md',{validate:false}).then(res => console.log(res));
+mdLinks('./Prueba/subPrueba/dataLovers.md',{validate:true}).then(res => console.log(res));
 
 
 module.exports = {
