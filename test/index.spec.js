@@ -53,6 +53,7 @@ describe('arrayForFiles, función para retornar un array con archivos, sino que 
     it('Deberia retornar un array si verifica que la ruta es un archivo', () => {
         expect(arrayForFiles('/Users/gaba/Documents/GABA/BOOTCAMP LABORATORIA /PROYECTOS/DEV001-md-links/DEV001-md-links/Prueba/subPrueba'))
             .toEqual([
+                '/Users/gaba/Documents/GABA/BOOTCAMP LABORATORIA /PROYECTOS/DEV001-md-links/DEV001-md-links/Prueba/subPrueba/cardValidation.md',
                 '/Users/gaba/Documents/GABA/BOOTCAMP LABORATORIA /PROYECTOS/DEV001-md-links/DEV001-md-links/Prueba/subPrueba/dataLovers.md',
                 '/Users/gaba/Documents/GABA/BOOTCAMP LABORATORIA /PROYECTOS/DEV001-md-links/DEV001-md-links/Prueba/subPrueba/mdLinks.md',
                 '/Users/gaba/Documents/GABA/BOOTCAMP LABORATORIA /PROYECTOS/DEV001-md-links/DEV001-md-links/Prueba/subPrueba/pruebalinks.md',
@@ -63,6 +64,7 @@ describe('arrayForFiles, función para retornar un array con archivos, sino que 
     it('Si le paso un directorio debe retornarme un array con los archivos del directorio', () => {
         expect(arrayForFiles('/Users/gaba/Documents/GABA/BOOTCAMP LABORATORIA /PROYECTOS/DEV001-md-links/DEV001-md-links/Prueba/subPrueba'))
             .toEqual([
+                '/Users/gaba/Documents/GABA/BOOTCAMP LABORATORIA /PROYECTOS/DEV001-md-links/DEV001-md-links/Prueba/subPrueba/cardValidation.md',
                 '/Users/gaba/Documents/GABA/BOOTCAMP LABORATORIA /PROYECTOS/DEV001-md-links/DEV001-md-links/Prueba/subPrueba/dataLovers.md',
                 '/Users/gaba/Documents/GABA/BOOTCAMP LABORATORIA /PROYECTOS/DEV001-md-links/DEV001-md-links/Prueba/subPrueba/mdLinks.md',
                 '/Users/gaba/Documents/GABA/BOOTCAMP LABORATORIA /PROYECTOS/DEV001-md-links/DEV001-md-links/Prueba/subPrueba/pruebalinks.md',
@@ -79,6 +81,7 @@ describe('returnOnlyFilesMd, función para retornar solo los archivos md', () =>
     it('Si le pasamos un array de archivos, hace un filtro y deberia retornar un array solo con archivos md', () => {
         expect(returnOnlyFilesMd('/Users/gaba/Documents/GABA/BOOTCAMP LABORATORIA /PROYECTOS/DEV001-md-links/DEV001-md-links/Prueba/subPrueba'))
             .toEqual([
+                '/Users/gaba/Documents/GABA/BOOTCAMP LABORATORIA /PROYECTOS/DEV001-md-links/DEV001-md-links/Prueba/subPrueba/cardValidation.md',
                 '/Users/gaba/Documents/GABA/BOOTCAMP LABORATORIA /PROYECTOS/DEV001-md-links/DEV001-md-links/Prueba/subPrueba/dataLovers.md',
                 '/Users/gaba/Documents/GABA/BOOTCAMP LABORATORIA /PROYECTOS/DEV001-md-links/DEV001-md-links/Prueba/subPrueba/mdLinks.md',
                 '/Users/gaba/Documents/GABA/BOOTCAMP LABORATORIA /PROYECTOS/DEV001-md-links/DEV001-md-links/Prueba/subPrueba/pruebalinks.md',
@@ -87,6 +90,7 @@ describe('returnOnlyFilesMd, función para retornar solo los archivos md', () =>
     });
     it('Si le pasamos un directorio, hace un filtro y deberia retornar un array con archivos md ', () => {
         expect(returnOnlyFilesMd('\Prueba')).toEqual([
+            "Prueba/subPrueba/cardValidation.md",
             "Prueba/subPrueba/dataLovers.md",
             "Prueba/subPrueba/mdLinks.md",
             "Prueba/subPrueba/pruebalinks.md",
