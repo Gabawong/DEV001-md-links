@@ -23,14 +23,14 @@ const mdLinks = (route, options) => {
       if (files.length === 0) {
         reject('THIS FILE DOES NOT EXIST')
       };
-      if (options.validate === false) {
-        resolve(links.then((res) => res.flat()));
-        return;
-      };
+    
       if (options.validate === true) {
         const valid = links.then((res) => validatedLinks(res.flat())
         .catch((error) => console.log(error)));
         resolve(valid);
+        return;
+      }else if (options.validate === false) {
+        resolve(links.then((res) => res.flat()));
         return;
       };
     }
@@ -39,7 +39,6 @@ const mdLinks = (route, options) => {
     }
   });
 };
-mdLinks('./Prueba/subPrueba/dataLovers.md',{validate:true}).then(res => console.log(res));
 
 
 module.exports = {

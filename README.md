@@ -98,7 +98,7 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
   * [Funciones (control de flujo)](https://curriculum.laboratoria.la/es/topics/javascript/02-flow-control/03-functions)
   * [Funciones clásicas](https://curriculum.laboratoria.la/es/topics/javascript/03-functions/01-classic)
   * [Arrow Functions](https://curriculum.laboratoria.la/es/topics/javascript/03-functions/02-arrow)
-  * [Funciones — bloques de código reutilizables - MDN](https://developer.mozilla.org/es/docs/Learn/JavaScript/Building_blocks/Functions)
+ 
 </p></details>
 
 - [ ] **Recursión o recursividad**
@@ -364,8 +364,7 @@ Por ejemplo:
 
 ```sh
 $ md-links ./some/example.md
-./some/example.md http://algo.com/2/3/ Link a algo
-./some/example.md https://otra-cosa.net/algun-doc.html algún doc
+
 ./some/example.md http://google.com/ Google
 ```
 
@@ -387,8 +386,7 @@ Por ejemplo:
 
 ```sh
 $ md-links ./some/example.md --validate
-./some/example.md http://algo.com/2/3/ ok 200 Link a algo
-./some/example.md https://otra-cosa.net/algun-doc.html fail 404 algún doc
+
 ./some/example.md http://google.com/ ok 301 Google
 ```
 
@@ -498,7 +496,7 @@ si tienes dudas existenciales con respecto a estas decisiones. No existe una
 * [¿Qué es Nodejs? Javascript en el Servidor - Fazt en YouTube](https://www.youtube.com/watch?v=WgSc1nv_4Gw)
 * [¿Simplemente qué es Node.js? - IBM Developer Works, 2011](https://www.ibm.com/developerworks/ssa/opensource/library/os-nodejs/index.html)
 * [Node.js y npm](https://www.genbeta.com/desarrollo/node-js-y-npm)
-* [Módulos, librerías, paquetes, frameworks... ¿cuál es la diferencia?](http://community.laboratoria.la/t/modulos-librerias-paquetes-frameworks-cual-es-la-diferencia/175)
+
 * [Asíncronía en js](https://carlosazaustre.es/manejando-la-asincronia-en-javascript)
 * [NPM](https://docs.npmjs.com/getting-started/what-is-npm)
 * [Publicar packpage](https://docs.npmjs.com/getting-started/publishing-npm-packages)

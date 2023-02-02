@@ -100,13 +100,6 @@ const validatedLinks = (arrayLinks) => {
                 };
                 return data;
             })
-            // .catch(() => {
-            //     return {
-            //         ...link,
-            //         status: 'Broken file',
-            //         ok: 'fail',
-            //     }
-            // })
             .catch((error) => {
                 const dataError = {
                     href: link.href,

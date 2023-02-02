@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const { mdLinks } = require('./mdLinks.js');
-// const chalk = require('chalk');
+//const chalk = require('chalk');
 const { totalLinks, uniqueLinks, brokenLinks } = require('./cli_stats.js');
 const figlet = require('figlet');
 
@@ -22,10 +22,11 @@ if (option.length === 1) {
         })
         .catch((reject) => {
             error(reject);
-            //if(reject === 'THIS FILE DOES NOT EXIST'){
+            if(reject === 'THIS FILE DOES NOT EXIST'){
             //console.log(chalk.red.bold('THIS FILE DOES NOT EXIST')) code: 'ERR_REQUIRE_ESM'
             //}
-        })
+        }
+    });
 
 } else {
     if (validate && stats) {

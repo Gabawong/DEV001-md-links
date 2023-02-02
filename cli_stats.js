@@ -1,10 +1,7 @@
 
-const  figlet  =  require ( 'figlet' ) ;
+// const  figlet  =  require ( 'figlet' ) ;
 
-const totalLinks = (array) => {
-    const total = array.length;
-    return stats = `Total : ${total}`
-};
+const totalLinks = (array) => `Total : ${array.length}`;
 //Se usa el metodo set para traer solo un link si es que se repitiesen
 const uniqueLinks = (array) => {
     const unique = [...new Set(array.map(link => link.href))];
