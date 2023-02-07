@@ -2,8 +2,8 @@
 const chalk = require('chalk');
 const { mdLinks } = require('./mdLinks.js');
 const { totalLinks, uniqueLinks, brokenLinks } = require('./cli_stats.js');
-const { msn1, msnAlert, instruction, msnHelp, msnError } = require('./style.js')
-const { log } = console;
+const { instruction, msnHelp, msnError,msn1} = require('./style.js')
+
 
 
 // const inquirer = require('inquirer');
@@ -33,7 +33,10 @@ mdLinks(userPath, { validate })
         } else if (help) {
             console.log(msnHelp());
         } else{
-            return msnError('THIS FILE HAS NO LINKS TO SHOW, TRY ANOTHER PATH')
+            console.log(msn1('md-links-go!'));
+            console.log(chalk.bold.bgCyan('These are the links found, you can enter the commands to see the statistics, if you have doubts enter --help.\n'));
+            console.log(resolve.flat());
+            //return msnError('Enter the command md-links-go, then the desired path (example: directory/example.md) You can enter --help to know the commands')
         }
     })
     .catch((reject) => {
