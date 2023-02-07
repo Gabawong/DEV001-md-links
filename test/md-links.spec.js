@@ -30,7 +30,7 @@ describe('mdLinks', () => {
       status: 200,
       message: 'ok'
     }];
-    expect(mdLinks(path, { validate: true })).resolves.toEqual(array);//Si no le pongo esto, me aparecerá todo el array
+    expect(mdLinks(path, { validate: true })).resolves.toEqual(array);
   });
 
 });

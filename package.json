@@ -38,7 +38,7 @@
   "author": "Gabriela Wongchuig Correa",
   "license": "ISC",
   "bin": {
-    "md-links": "cli.js"
+    "md-links-go": "cli.js"
   },
   "bugs": {
     "url": "https://github.com/Gabawong/DEV001-md-links/issues"

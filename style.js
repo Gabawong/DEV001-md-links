@@ -3,7 +3,7 @@ const figlet = require('figlet');
 const { log } = console;
 
 const msn1 = (msn1) => {
-    console.log(chalk.bold.cyanBright(figlet.textSync(msn1, {
+    log(chalk.bold.cyanBright(figlet.textSync(msn1, {
         font: 'ANSI Shadow',
         horizontalLayout: 'default',
         verticalLayout: 'default'
@@ -11,8 +11,9 @@ const msn1 = (msn1) => {
 }
 
 const msnAlert = (msn2) => {
-    console.log(chalk.bold.blueBright(figlet.textSync(msn2)));
-}
+    log(chalk.bold.blueBright(figlet.textSync(msn2)));
+};
+
 const msnError = (error) => {
     log(chalk.bold.bgRed(`${error}`));
 }
@@ -34,6 +35,7 @@ const msnHelp = () => {
     log(chalk.bold.cyan('--stats (or --s)                  -->  total and unique links \n '));
     log(chalk.bold.cyan('--validate --stats (or --v --s)   -->  total , unique and broken links \n'));
     log(chalk.bold.cyan('--help (or --h)                   -->  you are here \n'));
+    log(chalk.bold.yellow('Commands are written in lower case \n'));
 }
     
     module.exports = {
