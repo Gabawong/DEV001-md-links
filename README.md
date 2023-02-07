@@ -9,6 +9,7 @@
 #####Dentro de una comunidad de código abierto, nos han propuesto crear una herramienta usando Node.js, que lea y analice archivos en formato Markdown, para verificar los links que contengan y reportar algunas estadísticas.
 
 #COMO INSTALAR MD-LINKS-GO
+
 #####Para realizar la instalación, escribe el siguiente comando en tu terminal:
 
 ```javascript
