@@ -1,5 +1,5 @@
 {
-  "name": "md-links",
+  "name": "md-links-go",
   "version": "0.0.1",
   "engines": {
     "node": ">=16.x"
@@ -28,7 +28,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Gabawong/DEV001-md-links.git"
+    "url": "https://github.com/Gabawong/DEV001-md-links.git"
   },
   "keywords": [
     "CLI",
@@ -40,8 +40,12 @@
   "bin": {
     "md-links-go": "cli.js"
   },
+  "publishConfig": {
+    "@gabawong:registry": "https://npm.pkg.github.com"
+  },
   "bugs": {
     "url": "https://github.com/Gabawong/DEV001-md-links/issues"
   },
   "homepage": "https://github.com/Gabawong/DEV001-md-links#readme"
+  
 }
