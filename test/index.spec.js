@@ -1,16 +1,16 @@
 const {
     existsSync,
-    isAbsolute,
+    reviewAbsolute,
     isFile,
     arrayForFiles,
     returnOnlyFilesMd,
-    readFileLinks,
+    readFile,
     getAllLinks,
     validatedLinks
-} = require('../index.js');
+} = require('../mdLinks_Index.js');
 
-const { fetch } = require('../__mock__/fetch.js')
-
+//const { fetch } = require('../__mock__/fetch.js')
+const fetch = require('node-fetch');
 
 //-------------------Si el path existe------------------------
 describe('existsSync, esta función retorna un booleano y verifica si existe un directorio o archivo', () => {
@@ -27,13 +27,13 @@ describe('existsSync, esta función retorna un booleano y verifica si existe un 
 //------------------- Si el path es absoluto --------------------
 describe('isAbsolute, esta función detecta si el path es absoluto', () => {
     it('Deberia ser una función', () => {
-        expect(typeof isAbsolute).toBe('function');
+        expect(typeof reviewAbsolute).toBe('function');
     });
     it('Si es una ruta absoluta, debe devolver la misma ruta', () => {
-        expect(isAbsolute('/Users/gaba/Documents/GABA/BOOTCAMP LABORATORIA /PROYECTOS/DEV001-md-links/DEV001-md-links/README.md')).toBe('/Users/gaba/Documents/GABA/BOOTCAMP LABORATORIA /PROYECTOS/DEV001-md-links/DEV001-md-links/README.md');
+        expect(reviewAbsolute('/Users/gaba/Documents/GABA/BOOTCAMP LABORATORIA /PROYECTOS/DEV001-md-links/DEV001-md-links/README.md')).toBe('/Users/gaba/Documents/GABA/BOOTCAMP LABORATORIA /PROYECTOS/DEV001-md-links/DEV001-md-links/README.md');
     });
     it('Si es una ruta relativa, deberia convertirla a absoluta', () => {
-        expect(isAbsolute('README.md')).toBe('/Users/gaba/Documents/GABA/BOOTCAMP LABORATORIA /PROYECTOS/DEV001-md-links/DEV001-md-links/README.md');
+        expect(reviewAbsolute('README.md')).toBe('/Users/gaba/Documents/GABA/BOOTCAMP LABORATORIA /PROYECTOS/DEV001-md-links/DEV001-md-links/README.md');
     });
 });
 //---------------------------- saber si es un archivo ------------------------------------
@@ -101,11 +101,11 @@ describe('returnOnlyFilesMd, función para retornar solo los archivos md', () =>
 //------------------------------Leer los links, función devuelve una promesa --------------------------------------
 describe('readFileLinks, función que se encarga de leer los links', () => {
     it('Deberia ser una función', () => {
-        expect(typeof readFileLinks).toBe('function');
+        expect(typeof readFile).toBe('function');
     });
     //Documentacion jest - promises
     it('Debe devolver una promesa', () => {
-        return readFileLinks('/Users/gaba/Documents/GABA/BOOTCAMP LABORATORIA /PROYECTOS/DEV001-md-links/DEV001-md-links/Prueba/subPrueba/mdLinks.md')
+        return readFile('/Users/gaba/Documents/GABA/BOOTCAMP LABORATORIA /PROYECTOS/DEV001-md-links/DEV001-md-links/Prueba/subPrueba/mdLinks.md')
             .then(() => {
                 expect(readFileLinks).toBe(typeof 'promise')
             })
@@ -155,7 +155,7 @@ describe('validatedLinks, funcion que valida los links', () => {
             'href': 'https://es.wikipedia.org/wiki/Markdown',
             'text': 'Markdown',
             'file': '/Users/gaba/Documents/GABA/BOOTCAMP LABORATORIA /PROYECTOS/DEV001-md-links/DEV001-md-links/Prueba/subPrueba/pruebalinks.md',
-            'status': 200,
+            'status': 220,
             'message': 'ok',
         }];
         fetch.mockResolvedValue(link);

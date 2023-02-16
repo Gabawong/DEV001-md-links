@@ -1,17 +1,17 @@
 const {
   existsSync,
-  isAbsolute,
+  reviewAbsolute,
   returnOnlyFilesMd,
   getAllLinks,
   validatedLinks,
-} = require('./index.js')
+} = require('./mdLinks_Index.js')
 
 
 const mdLinks = (route, options) => {
   //resolve(resuelto) cuando se resuelve la promesa, y reject no,relacionado al then y catch, resolve y reject son callback,son funciones!! 
   return new Promise((resolve, reject) => {
-    const pathAbsolute = isAbsolute(route);
-    //verificamos si la ruta existe, le pasamos la fn isAbsolute que verifica
+    const pathAbsolute = reviewAbsolute(route);
+    //verificamos si la ruta existe, le pasamos la fn reviewAbsolute que verifica
     //si el path es absoluto, sino que lo vuelva absoluto
     if (existsSync(pathAbsolute)) {
       const files = returnOnlyFilesMd(pathAbsolute);

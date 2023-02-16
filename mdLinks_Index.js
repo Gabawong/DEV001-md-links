@@ -9,8 +9,8 @@ const fetch = require('node-fetch');
 const existsSync = (route) => fs.existsSync(route);
 
 //Vamos determinar si la ruta es absoluta,si es relativo, entonces hay que convertilo en absoluto
-const isAbsolute = (route) => (path.isAbsolute(route)) ? route : path.resolve(route);
-
+const reviewAbsolute = (route) => (path.isAbsolute(route)) ? route : path.resolve(route);
+// cambiar funcion isAbsolute
 //Saber si es un directorio o es un archivo.
 // const isDirectoryorfile = (route) => {
 //     if (fs.statSync(route).isDirectory()) {
@@ -35,7 +35,7 @@ const arrayForFiles = (routeFile) => {
     } else {
         const folderPath = fs.readdirSync(routeFile);
         folderPath.map((file) => {
-            // el metodo path.join une todos los seg de ruta, si la cadena es de long 0 devolverá '.'
+            // el metodo path.join une todos los seg de ruta, si la cadena es de long 0 devolverá ''
             const folderPathJoin = path.join(routeFile, file);
             arrayOnlyFiles = [...arrayOnlyFiles, ...(arrayForFiles(folderPathJoin))];
         })
@@ -54,7 +54,7 @@ const returnOnlyFilesMd = (routeFile) => {
 //console.log(readFile('./readme.md'));
 
 //ahora leemos los links 
- const readFileLinks = (route) => new Promise ((resolve,reject) => {
+ const readFile = (route) => new Promise ((resolve,reject) => {
     fs.readFile(route,'utf8', (error, file) => {
         if(error) {
             reject(error +'ERROR: THIS FILE DOES NOT EXIST')
@@ -67,7 +67,7 @@ const returnOnlyFilesMd = (routeFile) => {
 const getAllLinks = (route) => {
     return new Promise ((resolve, reject)=> {
     const arrayAllLinks = [];
-    readFileLinks(route)
+    readFile(route)
     .then((file) => {
         const regEx = /\[(.*)\]\(((?:\/|https?:\/\/).*)\)/gi;
         let match = regEx.exec(file);
@@ -117,12 +117,12 @@ const validatedLinks = (arrayLinks) => {
 
 module.exports = {
     existsSync,
-    isAbsolute,
+    reviewAbsolute,
     arrayForFiles,
     returnOnlyFilesMd,
     getAllLinks,
     validatedLinks,
     isFile,
-    readFileLinks
+    readFile
      
 }
